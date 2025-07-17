@@ -1,0 +1,28 @@
+BODY{
+    background-color: rgb(250, 215, 215);
+}
+ .womenbg{
+    background-color: rgb(143, 53, 53);
+     color: white;
+     display: flex;
+     justify-content: space-between;
+     padding: 0.9em;
+ }
+ /* bg-blue-500 text-white p-6 flex justify-between items-center */
+ 
+@media (max-width: 640px) {
+  .womenbg {
+    flex-direction: column;
+    padding: 1rem;
+  }
+  header h1 {
+    font-size: 1.25rem;
+  }
+  section {
+    padding: 1rem;
+  }
+  .grid {
+    grid-template-columns: 1fr !important;
+  }
+}
+ 

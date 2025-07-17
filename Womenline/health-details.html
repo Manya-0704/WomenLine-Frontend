@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Personal Health Form</title>
+  <link rel="stylesheet" href="healthinfo.css">
+  <style>
+    .back-btn {
+      display: none;
+      position: fixed;
+      top: 1rem;
+      left: 1rem;
+      z-index: 1000;
+      background: #fff;
+      border: 1px solid #ccc;
+      border-radius: 9999px;
+      padding: 0.5rem 1.2rem;
+      font-size: 1rem;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .back-btn:active {
+      background: #f3f3f3;
+    }
+    @media (max-width: 640px) {
+      .back-btn {
+        display: block;
+      }
+    }
+    body {
+      padding-top: 3.5rem;
+    }
+    @media (max-width: 640px) {
+      body {
+        padding-top: 0;
+        padding-bottom: 3.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <button class="back-btn" onclick="window.history.back()">&#8592; Back</button>
+
+  <div class="form-container">
+    <h2>Personal Health Form</h2>
+
+    <form id="healthForm">
+
+      <!-- Personal Details -->
+      <h3>Personal Details</h3>
+      <label>Full Name</label>
+      <input type="text" name="full_name" required placeholder="Enter your Name" title="Full Name"/>
+
+      <label>Age</label>
+      <input type="number" name="age" required placeholder="Enter your age" title="Age"/>
+
+      <label>Email Id </label>
+      <input type="email" name="email1" required placeholder="Enter the E-mail id" title="Email Id"/>
+
+      <label>Alternate Email</label>
+      <input type="email" name="email2" placeholder="Enter the alternate email id if any" title="Alternate Email"/>
+
+      <label> Contact Number</label>
+      <input type="tel" name="phone1" required  placeholder="Enter your contact details" title="Contact Number"/>
+
+      <label>Alternate Contact Number</label>
+      <input type="tel" name="phone2" placeholder="Enter alternate contact details" title="Alternate Contact Number"/>
+
+      <label>Address</label>
+      <textarea name="address" rows="2" placeholder="Enter your address" title="Address"></textarea>
+
+      <label>Blood Group</label>
+      <select name="blood_group" title="Blood Group">
+        <option value="">Select</option>
+        <option>A+</option><option>A-</option><option>B+</option><option>B-</option>
+        <option>O+</option><option>O-</option><option>AB+</option><option>AB-</option>
+      </select>
+
+      <!-- Health Info -->
+      <h3>Health Information</h3>
+      <label>Previous Health Conditions</label>
+      <textarea name="previous_health_conditions" rows="2" placeholder="Describe previous health conditions" title="Previous Health Conditions"></textarea>
+      <label>Existing Health Conditions</label>
+      <textarea name="existing_health_conditions" rows="2" placeholder="Describe existing health conditions" title="Existing Health Conditions"></textarea>
+
+      <label>Current Medications</label>
+      <textarea name="medications" rows="2" placeholder="List current medications" title="Current Medications"></textarea>
+
+      <label>Do you have any allergies?</label>
+      <div class="radio-group">
+        <label><input type="radio" name="allergies" value="Yes" required> Yes</label>
+        <label><input type="radio" name="allergies" value="No"> No</label>
+      </div>
+
+      <label>Allergy Details (if any)</label>
+      <textarea name="allergy_details" rows="2" placeholder="Describe allergies if any" title="Allergy Details"></textarea>
+
+      <!-- Menstrual Info -->
+      <h3>Menstrual Health</h3>
+      <label>Average Cycle Length (in days)</label>
+      <input type="number" name="cycle_length" placeholder="Enter average cycle length" title="Average Cycle Length" />
+
+      <label>Date of Last Period</label>
+      <input type="date" name="last_period" placeholder="Select date of last period" title="Date of Last Period" />
+
+      <label>Period Duration (in days)</label>
+      <input type="number" name="period_duration" placeholder="Enter period duration" title="Period Duration" />
+
+      <label>Do you experience irregular periods?</label>
+      <div class="radio-group">
+        <label><input type="radio" name="irregular" value="Yes" required> Yes</label>
+        <label><input type="radio" name="irregular" value="No"> No</label>
+      </div>
+
+      <label>Do you experience severe cramps?</label>
+      <div class="radio-group">
+        <label><input type="radio" name="pain" value="Yes" required> Yes</label>
+        <label><input type="radio" name="pain" value="No"> No</label>
+      </div>
+
+      <label>Do you track your cycle?</label>
+      <div class="radio-group">
+        <label><input type="radio" name="tracking" value="Yes" required> Yes</label>
+        <label><input type="radio" name="tracking" value="No"> No</label>
+      </div>
+
+      <label>Do you experience mood swings?</label>
+      <div class="radio-group">
+        <label><input type="radio" name="mood_swings" value="Yes" required> Yes</label>
+        <label><input type="radio" name="mood_swings" value="No"> No</label>
+      </div>
+
+      <label>Additional Notes</label>
+      <textarea name="notes" rows="3" placeholder="Additional notes" title="Additional Notes"></textarea>
+
+      <button type="submit">Submit Form</button>
+    </form>
+
+    <div id="confirmation" class="confirmation" style="display: none;">
+      ✔️ Your form has been submitted successfully!
+    </div>
+  </div>
+
+  <script src="js/lang.js"></script>
+  <script src="js/maCoin.js"></script>
+  <script>
+    // Sync MaCoin value in nav
+    function syncMaCoinNav() {
+      var val = localStorage.getItem('maCoin') || 120;
+      document.getElementById('maCoinValueNav').textContent = val;
+    }
+    syncMaCoinNav();
+    window.addEventListener('storage', syncMaCoinNav);
+  </script>

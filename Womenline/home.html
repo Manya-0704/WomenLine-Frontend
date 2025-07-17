@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>WOMENLINE - Empowering Women</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+  <!-- Navigation Bar -->
+  <nav class="navbar">
+    <div class="logo">
+      <img src="assets/LOGO.jpg" alt="WomenLine Logo" />
+      <span style="font-weight:800;font-size:1.3rem;color:#a71a1a;">WOMENLINE</span>
+    </div>
+    <div class="menu">
+      <a href="home.html">Home</a>
+      <a href="#about">About</a>
+      <a href="#services">Services</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <div class="actions">
+      <span class="macoin-pill">MaCoin: <span id="maCoinValue">120</span></span>
+      <a href="login.html" class="btn" style="background:#fff;color:#a71a1a;border:1px solid #a71a1a;">Login</a>
+      <a href="signup.html" class="btn">Sign Up</a>
+      <select class="lang-dropdown" id="langSwitcher" title="Select language">
+        <option value="en">English</option>
+        <option value="hi">हिन्दी</option>
+        <option value="ta">தமிழ்</option>
+      </select>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <h1>Join Hands With Women, For Women, Through WomenLine.</h1>
+    <p>An AI-powered personal wellness platform for women across all life stages.</p>
+    <a href="signup.html" class="btn">Get Started</a>
+  </section>
+
+  <!-- Features Section -->
+  <section class="features" id="services">
+    <div class="feature-card">
+      <h3>Period & Hormonal Health</h3>
+      <p>Track your cycle, symptoms, and hormonal health with privacy-first tools.</p>
+    </div>
+    <div class="feature-card">
+      <h3>Mental Wellness</h3>
+      <p>Mood tracking, CBT, gratitude journaling, and emotional support.</p>
+    </div>
+    <div class="feature-card">
+      <h3>Legal & Safety</h3>
+      <p>Abuse helplines, legal rights, and anonymous complaint submission.</p>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    Made with ❤️ for Women | © 2025 Womenline Project
+  </footer>
+
+  <script>
+    // MaCoin display logic (sync with localStorage if used elsewhere)
+    const maCoinValue = localStorage.getItem('maCoin') || 120;
+    document.getElementById('maCoinValue').textContent = maCoinValue;
+    // Language switcher placeholder (expand for full multilingual support)
+    document.getElementById('langSwitcher').addEventListener('change', function() {
+      // Add language switching logic here if needed
+    });
+  </script>
+</body>
+</html> 

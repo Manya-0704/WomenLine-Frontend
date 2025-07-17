@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>WOMENLINE - Platform Intro</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+  <!-- Navigation Bar -->
+  <nav class="navbar">
+    <div class="logo">
+      <img src="assets/LOGO.jpg" alt="WomenLine Logo" />
+      <span style="font-weight:800;font-size:1.3rem;color:#fff;">WOMENLINE</span>
+    </div>
+    <div class="menu">
+      <a href="index.html">Home</a>
+      <a href="#about">About</a>
+      <a href="#services">Services</a>
+      <a href="#contact">Contact</a>
+      <a href="health-details.html">Health Info</a>
+    </div>
+    <div class="actions">
+      <span class="macoin-pill" id="maCoinPill">MaCoin: <span id="maCoinValue">120</span></span>
+      <a href="login.html" class="btn" style="background:#fff;color:#a71a1a;border:1px solid #a71a1a;">Login</a>
+      <a href="signup.html" class="btn">Sign Up</a>
+      <select class="lang-dropdown" id="langSwitcher" title="Select language">
+        <option value="en">English</option>
+        <option value="hi">हिन्दी</option>
+        <option value="ta">தமிழ்</option>
+      </select>
+    </div>
+  </nav>
+  <div id="maCoinCard" style="display:none;max-width:400px;margin:1.5rem auto 0 auto;padding:1.2rem 1.5rem;background:#fffbe6;border:1.5px solid #f3c06c;border-radius:16px;box-shadow:0 4px 16px rgba(143,53,53,0.07);color:#8f3535;position:relative;text-align:left;">
+    <strong style="font-size:1.1rem;">What is MaCoin?</strong>
+    <p style="margin:0.7rem 0 0.5rem 0;line-height:1.5;">MaCoin is your reward currency! Earn more by engaging with the platform—complete health check-ins, upload logs, report abuse, and participate in the community. Redeem MaCoin for rewards, discounts, or donate to girls' education funds!</p>
+    <button id="closeMaCoinCard" style="position:absolute;top:0.5rem;right:0.7rem;background:none;border:none;font-size:1.3rem;color:#b45309;cursor:pointer;">&times;</button>
+  </div>
+
+  <!-- Back to Home Button -->
+  <div style="padding:1.5rem 0 0 1.5rem;">
+    <a href="index.html" class="btn" style="background:#fff;color:#a71a1a;border:1px solid #a71a1a;">← Back to Home</a>
+  </div>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <h1>Welcome to Womenline!</h1>
+    <p>Discover our features and get started on your wellness journey.</p>
+    <a href="signup.html" class="btn">Get Started</a>
+    <a href="health-details.html" class="btn" style="margin-left:1rem;">Go to Health Details</a>
+  </section>
+
+  <!-- Features Section -->
+  <section class="features" id="services">
+    <div class="feature-card">
+      <h3>Period & Hormonal Health</h3>
+      <p>Track your cycle, symptoms, and hormonal health with privacy-first tools.</p>
+    </div>
+    <div class="feature-card">
+      <h3>Mental Wellness</h3>
+      <p>Mood tracking, CBT, gratitude journaling, and emotional support.</p>
+    </div>
+    <div class="feature-card">
+      <h3>Legal & Safety</h3>
+      <p>Abuse helplines, legal rights, and anonymous complaint submission.</p>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    Made with ❤️ for Women | © 2025 Womenline Project
+  </footer>
+
+  <script>
+    // MaCoin display logic (sync with localStorage if used elsewhere)
+    const maCoinValue = localStorage.getItem('maCoin') || 120;
+    document.getElementById('maCoinValue').textContent = maCoinValue;
+    // Make MaCoin pill clickable and show a card
+    const maCoinPill = document.getElementById('maCoinPill');
+    const maCoinCard = document.getElementById('maCoinCard');
+    const closeMaCoinCard = document.getElementById('closeMaCoinCard');
+    if (maCoinPill && maCoinCard && closeMaCoinCard) {
+      maCoinPill.style.cursor = 'pointer';
+      maCoinPill.onclick = function() {
+        maCoinCard.style.display = 'block';
+      };
+      closeMaCoinCard.onclick = function() {
+        maCoinCard.style.display = 'none';
+      };
+    }
+    // Language switcher placeholder (expand for full multilingual support)
+    document.getElementById('langSwitcher').addEventListener('change', function() {
+      // Add language switching logic here if needed
+    });
+  </script>
+</body>
+</html>

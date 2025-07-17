@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>WOMENLINE - Home</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+  <!-- Navigation Bar -->
+  <nav class="navbar">
+    <div class="logo">
+      <img src="assets/LOGO.jpg" alt="WomenLine Logo" />
+      <span style="font-weight:800;font-size:1.3rem;color:#fff;">WOMENLINE</span>
+    </div>
+    <div class="menu">
+      <a href="index.html">Home</a>
+      <a href="#about">About</a>
+      <a href="#services">Services</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <div class="actions">
+      <a href="login.html" class="btn" style="background:#fff;color:#8f3535;border:1.5px solid #8f3535;">Login</a>
+      <a href="signup.html" class="btn">Sign Up</a>
+      <select class="lang-dropdown" id="langSwitcher" title="Select language">
+        <option value="en">English</option>
+        <option value="hi">हिन्दी</option>
+        <option value="ta">தமிழ்</option>
+      </select>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <h1>Join Hands With Women, For Women, Through WomenLine.</h1>
+    <p>An AI-powered personal wellness platform for women across all life stages.</p>
+    <a href="landing.html" class="btn">Explore Platform</a>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    Made with ❤️ for Women | © 2025 Womenline Project
+  </footer>
+
+  <script>
+    // Language switcher placeholder (expand for full multilingual support)
+    document.getElementById('langSwitcher').addEventListener('change', function() {
+      // Add language switching logic here if needed
+    });
+    // If a MaCoin element is ever added, make it clickable and show a message
+    const maCoinEl = document.getElementById('maCoinValue');
+    if (maCoinEl) {
+      maCoinEl.parentElement.style.cursor = 'pointer';
+      maCoinEl.parentElement.onclick = function() {
+        alert('MaCoin is your reward currency! Earn more by engaging with the platform.');
+      };
+    }
+  </script>
+</body>
+</html> 

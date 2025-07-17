@@ -1,0 +1,122 @@
+
+    /* class="bg-gray-100 py-10 px-4 sm:px-10 " */
+  /* body {
+    margin: 0;
+    line-height: inherit;
+    background-color: rgb(255, 185, 185);
+    padding-top: 2.5rem;
+    padding-bottom: 2.5rem;
+    
+
+
+
+  } */
+   body {
+      background-color: rgb(146, 93, 93);
+      font-family: 'Segoe UI', sans-serif;
+      padding: 20px;
+      margin: 0;
+    }
+
+    .form-container {
+      max-width: 800px;
+      background: rgb(241, 209, 209);
+      padding: 30px;
+      margin: auto;
+      border-radius: 15px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    }
+
+    h2 {
+      text-align: center;
+      color: #a71a1a;
+      margin-bottom: 20px;
+      font-family: 'Times New Roman', Times, serif;
+      font-size: 40px;
+     
+      
+     }
+
+    h3 {
+      color: #252121;
+      margin-top: 30px;
+      border-bottom: 1px solid #000000;
+      padding-bottom: 2px;
+    }
+
+    label {
+      display: block;
+       margin-top: 15px;
+      font-weight: 600;
+      color: #292222;
+    }
+
+    input[type="text"],
+    input[type="number"],
+    input[type="email"],
+    input[type="tel"],
+    input[type="date"],
+    select,
+    textarea {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      box-sizing: border-box;
+      font-size: 15px;
+    }
+
+    textarea {
+      resize: vertical;
+    }
+
+    .radio-group {
+      margin-top: 10px;
+    }
+
+    .radio-group label {
+      font-weight: normal;
+      margin-right: 20px;
+    }
+
+    button {
+      background-color: #582424;
+      color: white;
+      padding: 12px 20px;
+      border: none;
+      border-radius: 6px;
+      font-size: 16px;
+      margin-top: 30px;
+      cursor: pointer;
+      display: block;
+      width: 100%;
+    }
+
+    button:hover {
+      background-color: #9c0303;
+    }
+
+    .confirmation {
+      text-align: center;
+      color: green;
+      font-weight: bold;
+      margin-top: 20px;
+    }
+
+    @media screen and (max-width: 600px) {
+      .form-container {
+        padding: 20px;
+      }
+    }
+
+@media (max-width: 640px) {
+  .form-container {
+    width: 95vw;
+    padding: 1rem;
+    margin: 1rem auto;
+  }
+  form {
+    padding: 0.5rem;
+  }
+}
