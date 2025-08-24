@@ -34,6 +34,8 @@ The following endpoints are available through the Render backend:
 ### Authentication
 - `POST /api/auth/register` - User registration
 - `POST /api/auth/login` - User login
+- `POST /api/auth/forgot-password` - Request password reset ⚠️ **Pending Implementation**
+- `POST /api/auth/reset-password` - Reset password with token ⚠️ **Pending Implementation**
 
 ### Journals
 - `GET /api/journals` - Get user journals
@@ -51,6 +53,28 @@ The following endpoints are available through the Render backend:
 ### PDF Generation
 - `GET /api/pdf/sample` - Generate sample PDF
 
+## 🔐 Password Reset Functionality
+
+### Current Status
+- ✅ **Frontend**: Fully implemented and deployed
+- ⚠️ **Backend**: Endpoints pending implementation
+- 🔄 **Integration**: Ready for backend completion
+
+### Frontend Features
+- Request password reset form (`/reset`)
+- Set new password form (`/reset-confirmation`)
+- Comprehensive error handling
+- Backend unavailable fallback
+- Responsive design
+
+### Backend Requirements
+The following endpoints need to be implemented on the Render backend:
+
+1. **POST /api/auth/forgot-password** - Send reset email
+2. **POST /api/auth/reset-password** - Process password reset
+
+See `PASSWORD_RESET_IMPLEMENTATION.md` for complete implementation details.
+
 ## Testing the Integration
 
 ### 1. Verify Backend Connectivity
@@ -64,6 +88,7 @@ curl https://team5555-womenline-final.onrender.com/api/health
 2. Test user registration/login
 3. Verify journal creation and retrieval
 4. Test file upload functionality
+5. Test password reset flow (will show backend unavailable message)
 
 ### 3. Monitor Network Requests
 Use browser DevTools to monitor API calls and ensure they're going to the correct backend URL.
@@ -84,22 +109,32 @@ Use browser DevTools to monitor API calls and ensure they're going to the correc
    - Verify JWT token handling
    - Check if tokens are being properly stored and sent
 
+4. **Password Reset Not Working**
+   - Frontend is fully functional
+   - Backend endpoints need to be implemented
+   - Check `PASSWORD_RESET_IMPLEMENTATION.md` for details
+
 ### Debug Steps
 
 1. Check browser console for API errors
 2. Verify the BASE_URL in the Network tab
 3. Test backend endpoints directly with tools like Postman
 4. Check Render logs for backend errors
+5. For password reset issues, check if backend endpoints exist
 
 ## Deployment Checklist
 
-- [ ] Update API configuration in `src/api.js`
-- [ ] Set environment variables in Vercel
-- [ ] Deploy frontend to Vercel
-- [ ] Test all major functionality
-- [ ] Verify backend connectivity
-- [ ] Monitor for errors in production
+- [x] Update API configuration in `src/api.js`
+- [x] Set environment variables in Vercel
+- [x] Deploy frontend to Vercel
+- [x] Test all major functionality
+- [x] Verify backend connectivity
+- [x] Monitor for errors in production
+- [x] Implement password reset frontend
+- [ ] Implement password reset backend endpoints
+- [ ] Test complete password reset flow
 
 ## Support
 For backend issues, check the Render deployment logs.
-For frontend issues, check the Vercel deployment logs and browser console. 
+For frontend issues, check the Vercel deployment logs and browser console.
+For password reset implementation, see `PASSWORD_RESET_IMPLEMENTATION.md`. 

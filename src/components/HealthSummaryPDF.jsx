@@ -1,6 +1,7 @@
 import React, { useRef, useState } from 'react';
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
+import './HealthSummaryPDF.css';
 
 const HealthSummaryPDF = () => {
   const [formData, setFormData] = useState({
@@ -44,8 +45,8 @@ const HealthSummaryPDF = () => {
   return (
     <div className="health-summary-container">
       <div className="health-summary-header">
-        <h2>Gynecologist Visit - Health Summary Generator</h2>
-        <p>Create a comprehensive health summary for your gynecologist visit</p>
+        <h2 className="health-summary-title">🏥 Gynecologist Visit - Health Summary Generator</h2>
+        <p className="health-summary-subtitle">Create a comprehensive health summary for your gynecologist visit</p>
       </div>
 
       <div className="health-summary-form">
@@ -103,81 +104,106 @@ const HealthSummaryPDF = () => {
             name="menstrualHistory" 
             value={formData.menstrualHistory} 
             onChange={handleChange}
-            placeholder="Describe your menstrual history..."
+            placeholder="Describe your menstrual cycle, any irregularities..."
             rows="4"
           ></textarea>
         </div>
 
         <div className="form-group">
-          <label htmlFor="medications">Medications Prescribed:</label>
+          <label htmlFor="medications">Current Medications:</label>
           <textarea 
             id="medications"
             name="medications" 
             value={formData.medications} 
             onChange={handleChange}
-            placeholder="List medications prescribed..."
-            rows="4"
+            placeholder="List any medications you're currently taking..."
+            rows="3"
           ></textarea>
         </div>
 
         <div className="form-group">
-          <label htmlFor="doctorNotes">Doctor's Notes:</label>
+          <label htmlFor="doctorNotes">Additional Notes for Doctor:</label>
           <textarea 
             id="doctorNotes"
             name="doctorNotes" 
             value={formData.doctorNotes} 
             onChange={handleChange}
-            placeholder="Enter doctor's notes..."
+            placeholder="Any additional information you want to share with your doctor..."
             rows="4"
           ></textarea>
         </div>
+
+        <button 
+          className="generate-pdf-btn"
+          onClick={handleDownloadPDF}
+          disabled={!formData.name || !formData.age || !formData.date}
+        >
+          📄 Generate Health Summary PDF
+        </button>
       </div>
 
-      {/* Preview Section */}
-      <div className="health-summary-preview">
-        <h3>Health Summary Report</h3>
-        <div ref={summaryRef} className="preview-content">
-          <div className="preview-header">
-            <h4>Womenline Health Summary</h4>
-            <p><strong>Generated on:</strong> {new Date().toLocaleDateString()}</p>
-          </div>
-          
-          <div className="preview-section">
-            <p><strong>Patient Name:</strong> {formData.name || 'Not specified'}</p>
-            <p><strong>Age:</strong> {formData.age || 'Not specified'}</p>
-            <p><strong>Visit Date:</strong> {formData.date || 'Not specified'}</p>
+      {/* PDF Preview Section */}
+      <div className="pdf-preview-section">
+        <h3 className="preview-title">📋 PDF Preview</h3>
+        <div className="pdf-preview" ref={summaryRef}>
+          <div className="pdf-header">
+            <h1 className="pdf-main-title">Health Summary Report</h1>
+            <div className="pdf-info">
+              <p><strong>Generated Date:</strong> {new Date().toLocaleDateString()}</p>
+              <p><strong>Report Type:</strong> Gynecologist Visit Summary</p>
+            </div>
           </div>
 
-          <div className="preview-section">
-            <h5>Symptoms</h5>
-            <p>{formData.symptoms || 'No symptoms recorded'}</p>
-          </div>
+          <div className="pdf-content">
+            <div className="patient-info">
+              <h2>Patient Information</h2>
+              <div className="info-grid">
+                <div className="info-item">
+                  <strong>Name:</strong> {formData.name || 'Not specified'}
+                </div>
+                <div className="info-item">
+                  <strong>Age:</strong> {formData.age || 'Not specified'}
+                </div>
+                <div className="info-item">
+                  <strong>Visit Date:</strong> {formData.date || 'Not specified'}
+                </div>
+              </div>
+            </div>
 
-          <div className="preview-section">
-            <h5>Menstrual History</h5>
-            <p>{formData.menstrualHistory || 'No menstrual history recorded'}</p>
-          </div>
+            <div className="symptoms-section">
+              <h2>Symptoms</h2>
+              <p className="symptoms-text">
+                {formData.symptoms || 'No symptoms reported'}
+              </p>
+            </div>
 
-          <div className="preview-section">
-            <h5>Medications</h5>
-            <p>{formData.medications || 'No medications recorded'}</p>
-          </div>
+            <div className="menstrual-section">
+              <h2>Menstrual History</h2>
+              <p className="menstrual-text">
+                {formData.menstrualHistory || 'No menstrual history provided'}
+              </p>
+            </div>
 
-          <div className="preview-section">
-            <h5>Doctor's Notes</h5>
-            <p>{formData.doctorNotes || 'No doctor notes recorded'}</p>
+            <div className="medications-section">
+              <h2>Current Medications</h2>
+              <p className="medications-text">
+                {formData.medications || 'No medications reported'}
+              </p>
+            </div>
+
+            <div className="notes-section">
+              <h2>Additional Notes</h2>
+              <p className="notes-text">
+                {formData.doctorNotes || 'No additional notes provided'}
+              </p>
+            </div>
+
+            <div className="pdf-footer">
+              <p><em>This report was generated by Womenline Health Summary Generator</em></p>
+              <p><em>Please review all information before sharing with your healthcare provider</em></p>
+            </div>
           </div>
         </div>
-      </div>
-
-      <div className="health-summary-actions">
-        <button 
-          onClick={handleDownloadPDF} 
-          className="download-pdf-btn"
-          disabled={!formData.name || !formData.date}
-        >
-          Download PDF
-        </button>
       </div>
     </div>
   );
