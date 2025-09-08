@@ -4,16 +4,13 @@ import { register } from "../api";
 
 const Signup = () => {
   const [form, setForm] = useState({ 
-    firstName: "", 
-    lastName: "", 
+    Fullname: "", 
     email: "", 
     password: "", 
-    confirm: "" 
+    phone: "+91" // default +91
   });
-  const [agree, setAgree] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
-  const [success, setSuccess] = useState(false);
   const navigate = useNavigate();
 
   const validatePassword = (password) => {
@@ -40,19 +37,7 @@ const Signup = () => {
   const handleSubmit = async e => {
     e.preventDefault();
     setError("");
-    setSuccess(false);
-    
-    // Validation
-    if (!agree) {
-      setError("You must agree to the terms and policies.");
-      return;
-    }
-    
-    if (form.password !== form.confirm) {
-      setError("Passwords do not match");
-      return;
-    }
-    
+
     const passwordErrors = validatePassword(form.password);
     if (passwordErrors.length > 0) {
       setError(`Password requirements: ${passwordErrors.join(", ")}`);
@@ -62,15 +47,15 @@ const Signup = () => {
     setLoading(true);
     try {
       const response = await register({
-        firstName: form.firstName,
-        lastName: form.lastName,
+        Fullname: form.Fullname,
         email: form.email,
-        password: form.password
+        password: form.password,
+        phone: form.phone,
       });
-      
-      if (response.success) {
-        setSuccess(true);
-        setTimeout(() => navigate("/login"), 1200);
+
+      // ✅ Redirect to login if message says user registered
+      if (response.message && response.message.includes("User registered")) {
+        navigate("/login", { replace: true, state: { email: form.email } });
       } else {
         setError(response.message || "Registration failed");
       }
@@ -82,33 +67,37 @@ const Signup = () => {
   };
 
   return (
-    <div className="card" style={{ maxWidth: 400, boxShadow: '0 6px 32px 0 rgba(123, 63, 63, 0.12)', padding: '2.5rem 2rem' }}>
+    <div 
+      className="card" 
+      style={{ 
+        maxWidth: 400, 
+        boxShadow: '0 6px 32px 0 rgba(123, 63, 63, 0.12)', 
+        padding: '2.5rem 2rem' 
+      }}
+    >
       <div style={{ textAlign: 'center', marginBottom: 16 }}>
         <h2 style={{ margin: 0, color: '#7b3f3f' }}>WOMENLINE</h2>
-        <h3 style={{ margin: '0.5rem 0 1.5rem 0', color: '#222', fontWeight: 600 }}>Create Your Account</h3>
+        <h3 style={{ margin: '0.5rem 0 1.5rem 0', color: '#222', fontWeight: 600 }}>
+          Create Your Account
+        </h3>
       </div>
-      <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '0.7rem' }}>
-        <label htmlFor="firstName" style={{ textAlign: 'left' }}>First Name</label>
+
+      <form 
+        onSubmit={handleSubmit} 
+        style={{ display: 'flex', flexDirection: 'column', gap: '0.7rem' }}
+      >
+        <label htmlFor="Fullname" style={{ textAlign: 'left' }}>Full Name</label>
         <input 
-          id="firstName" 
+          id="Fullname" 
           type="text" 
-          placeholder="Enter your first name" 
-          value={form.firstName} 
+          placeholder="Enter your Full name" 
+          value={form.Fullname} 
           onChange={handleChange} 
           required 
           disabled={loading}
         />
-        <label htmlFor="lastName" style={{ textAlign: 'left' }}>Last Name</label>
-        <input 
-          id="lastName" 
-          type="text" 
-          placeholder="Enter your last name" 
-          value={form.lastName} 
-          onChange={handleChange} 
-          required 
-          disabled={loading}
-        />
-        <label htmlFor="email" style={{ textAlign: 'left' }}>Email Address</label>
+        
+        <label htmlFor="email" style={{ textAlign: 'left' }}>Email</label>
         <input 
           id="email" 
           type="email" 
@@ -118,6 +107,7 @@ const Signup = () => {
           required 
           disabled={loading}
         />
+
         <label htmlFor="password" style={{ textAlign: 'left' }}>Password</label>
         <input 
           id="password" 
@@ -127,32 +117,25 @@ const Signup = () => {
           onChange={handleChange} 
           required 
           disabled={loading}
-        />
-        <div style={{ fontSize: '12px', color: '#666', marginBottom: '8px' }}>
-          Password must contain: 8+ characters, uppercase, lowercase, number, special character
-        </div>
-        <label htmlFor="confirm" style={{ textAlign: 'left' }}>Confirm Password</label>
+        /> 
+
+        <label htmlFor="phone" style={{ textAlign: 'left' }}>Phone</label>
         <input 
-          id="confirm" 
-          type="password" 
-          placeholder="Confirm your password" 
-          value={form.confirm} 
-          onChange={handleChange} 
+          id="phone" 
+          type="tel" 
+          placeholder="Enter your phone" 
+          value={form.phone} 
+          onChange={(e) => {
+            let value = e.target.value;
+            value = value.replace(/[^\d+]/g, "");
+            if (!value.startsWith("+91")) value = "+91" + value.replace(/\+91/g, "");
+            if (value.length > 13) value = value.slice(0, 13);
+            setForm({ ...form, phone: value });
+          }} 
           required 
           disabled={loading}
         />
-        <div className="checkbox-row" style={{ justifyContent: 'flex-start', width: '100%' }}>
-          <input 
-            type="checkbox" 
-            id="agree" 
-            checked={agree} 
-            onChange={e => setAgree(e.target.checked)}
-            disabled={loading}
-          />
-          <label htmlFor="agree">
-            I agree to the <a href="#" style={{ color: '#7b3f3f', textDecoration: 'underline' }}>terms and policies</a>
-          </label>
-        </div>
+
         <button 
           type="submit" 
           style={{ width: '100%', marginTop: 8 }} 
@@ -160,14 +143,21 @@ const Signup = () => {
         >
           {loading ? "Signing Up..." : "Sign Up"}
         </button>
-        {error && <div style={{ color: 'red', marginTop: 6, textAlign: 'left' }}>{error}</div>}
-        {success && <div style={{ color: 'green', marginTop: 6, textAlign: 'left' }}>Registration successful! Redirecting to login...</div>}
+        {error && (
+          <div style={{ color: 'red', marginTop: 6, textAlign: 'left' }}>
+            {error}
+          </div>
+        )}
       </form>
+
       <div style={{ textAlign: 'center', fontSize: 14, marginTop: 18 }}>
-        Already have an account? <Link to="/login" style={{ color: '#7b3f3f', fontWeight: 600 }}>Log in</Link>
+        Already have an account?{" "}
+        <Link to="/login" style={{ color: '#7b3f3f', fontWeight: 600 }}>
+          Log in
+        </Link>
       </div>
     </div>
   );
 };
 
-export default Signup; 
+export default Signup;
